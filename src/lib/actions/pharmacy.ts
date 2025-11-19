@@ -386,9 +386,11 @@ export async function dispenseMultipleDrugs(data: {
 }) {
   try {
     const session = await auth()
-    if (!session?.user) {
+    if (!session?.user || !session.user.id) {
       return { success: false, error: "Unauthorized" }
     }
+
+    const userId = session.user.id
 
     if (!["ADMIN", "PHARMACIST"].includes(session.user.role)) {
       return { success: false, error: "Only pharmacists can dispense drugs" }
@@ -432,7 +434,7 @@ export async function dispenseMultipleDrugs(data: {
             quantity: item.quantity,
             unitPrice: drug.price,
             totalPrice: itemTotal,
-            dispensedBy: session.user.id,
+            dispensedBy: userId,
             notes: data.notes,
           },
         })
