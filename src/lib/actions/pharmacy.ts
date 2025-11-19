@@ -235,7 +235,7 @@ export async function dispenseDrug(data: {
 }) {
   try {
     const session = await auth()
-    if (!session?.user) {
+    if (!session?.user || !session.user.id) {
       return { success: false, error: "Unauthorized" }
     }
 
