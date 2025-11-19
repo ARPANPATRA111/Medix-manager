@@ -239,6 +239,8 @@ export async function dispenseDrug(data: {
       return { success: false, error: "Unauthorized" }
     }
 
+    const userId = session.user.id
+
     if (!["ADMIN", "PHARMACIST"].includes(session.user.role)) {
       return { success: false, error: "Only pharmacists can dispense drugs" }
     }
@@ -267,7 +269,7 @@ export async function dispenseDrug(data: {
           quantity: data.quantity,
           unitPrice: drug.price,
           totalPrice,
-          dispensedBy: session.user.id,
+          dispensedBy: userId,
           notes: data.notes,
         },
         include: {
