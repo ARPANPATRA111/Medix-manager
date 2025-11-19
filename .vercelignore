@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Local environment
+.env
+.env*.local
+
+# Database
+prisma/*.db
+prisma/*.db-journal
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
