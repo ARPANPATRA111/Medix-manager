@@ -139,6 +139,7 @@ export async function markBillingAsPaid(billingIds: string[]) {
     })
 
     revalidatePath("/dashboard/billing")
+    revalidatePath("/dashboard")
     return { success: true }
   } catch (error) {
     console.error("Error marking billing as paid:", error)

@@ -5,8 +5,11 @@ import { db } from "@/lib/db"
 import DashboardLayout from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DrugList } from "@/components/pharmacy/drug-list"
-import { DispenseDialog } from "@/components/pharmacy/dispense-dialog"
 import { MultiDispenseDialog } from "@/components/pharmacy/multi-dispense-dialog"
+
+// Force dynamic rendering to ensure fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 async function getPharmacyStats() {
   try {
@@ -115,10 +118,7 @@ export default async function PharmacyPage() {
             <CardTitle>Medication Inventory</CardTitle>
             <CardDescription>View and manage all medications in the pharmacy.</CardDescription>
           </div>
-          <div className="flex gap-2">
-            <DispenseDialog />
-            <MultiDispenseDialog />
-          </div>
+          <MultiDispenseDialog />
         </CardHeader>
         <CardContent>
           <Suspense fallback={<div>Loading medications...</div>}>

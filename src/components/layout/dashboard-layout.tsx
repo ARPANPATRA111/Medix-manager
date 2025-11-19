@@ -108,7 +108,7 @@ export default function DashboardLayout({
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-20 bg-black/50 backdrop-blur-sm lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -121,20 +121,20 @@ export default function DashboardLayout({
       >
         <div className="flex flex-col h-full">
           {/* Logo and brand */}
-          <div className="flex items-center justify-between h-16 px-6 border-b">
-            <div className="flex items-center space-x-2">
-              <Heart className="h-8 w-8 text-red-500" />
-              <span className="text-lg font-semibold text-gray-900">
-                HMS
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b">
+            <div className="flex items-center space-x-2 min-w-0 flex-1">
+              <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-red-500 shrink-0" />
+              <span className="text-base sm:text-lg font-semibold text-gray-900 truncate">
+                Hospital Management System
               </span>
             </div>
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden"
+              className="lg:hidden shrink-0 ml-2"
               onClick={() => setSidebarOpen(false)}
             >
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5" />
             </Button>
           </div>
 
@@ -207,26 +207,36 @@ export default function DashboardLayout({
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <header className="bg-white shadow-sm border-b">
-          <div className="flex items-center justify-between h-16 px-6">
-            <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6">
+            <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
               <Button
                 variant="ghost"
                 size="sm"
-                className="lg:hidden"
+                className="lg:hidden shrink-0"
                 onClick={() => setSidebarOpen(true)}
               >
-                <Menu className="h-4 w-4" />
+                <Menu className="h-5 w-5" />
               </Button>
-              <h1 className="text-xl font-semibold text-gray-900">
-                Hospital Management System
-              </h1>
+              <div className="flex items-center space-x-2 min-w-0">
+                <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-red-500 shrink-0 lg:hidden" />
+                <h1 className="text-sm sm:text-lg lg:text-xl font-semibold text-gray-900 truncate">
+                  <span className="hidden sm:inline">Hospital Management System</span>
+                  <span className="sm:hidden">HMS</span>
+                </h1>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-600">
+            <div className="flex items-center space-x-2 shrink-0">
+              <span className="text-xs sm:text-sm text-gray-600 hidden md:inline">
                 {new Date().toLocaleDateString("en-US", {
                   weekday: "long",
                   year: "numeric",
                   month: "long",
+                  day: "numeric",
+                })}
+              </span>
+              <span className="text-xs text-gray-600 md:hidden">
+                {new Date().toLocaleDateString("en-US", {
+                  month: "short",
                   day: "numeric",
                 })}
               </span>
