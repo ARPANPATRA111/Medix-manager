@@ -141,7 +141,7 @@ async function getDashboardData() {
       }
     }),
     // Get last 7 days appointments for chart
-    db.$queryRaw`
+    db.$queryRaw<Array<{ date: string; count: number }>>`
       SELECT 
         DATE("appointmentDate") as date,
         COUNT(*) as count
@@ -151,7 +151,7 @@ async function getDashboardData() {
       ORDER BY date
     `,
     // Get last 7 days revenue for chart
-    db.$queryRaw`
+    db.$queryRaw<Array<{ date: string; amount: number }>>`
       SELECT 
         DATE("paidAt") as date,
         SUM("amount") as amount
@@ -183,8 +183,14 @@ async function getDashboardData() {
     bedOccupancyRate: totalBeds > 0 ? Math.round((occupiedBeds / totalBeds) * 100) : 0,
     recentAppointments,
     recentBills,
-    appointmentTrend,
-    revenueTrend
+    appointmentTrend: appointmentTrend.map(item => ({
+      date: item.date,
+      count: Number(item.count)
+    })),
+    revenueTrend: revenueTrend.map(item => ({
+      date: item.date,
+      amount: Number(item.amount)
+    }))
   }
 }
 

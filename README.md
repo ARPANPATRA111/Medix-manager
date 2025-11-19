@@ -265,12 +265,39 @@ This is a production-style hospital management system. For contributions:
 4. Test on multiple screen sizes
 5. Maintain security standards
 
+## 🌐 Deployment to Vercel
+
+This project is ready for deployment to Vercel. See the detailed [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for step-by-step instructions.
+
+### Quick Deployment Steps:
+
+1. **Database Migration:** Switch from SQLite to PostgreSQL (already configured)
+2. **Set up PostgreSQL:** Use Vercel Postgres, Supabase, or Neon
+3. **Configure Environment Variables:** Add DATABASE_URL, NEXTAUTH_SECRET, NEXTAUTH_URL
+4. **Deploy:** Push to GitHub or use Vercel CLI
+
+```bash
+# Quick deploy with Vercel CLI
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+### Important Changes for Production:
+- ✅ Database provider changed to PostgreSQL
+- ✅ Build scripts updated for Vercel
+- ✅ Environment configuration ready
+- ✅ Prisma migrations configured
+
+**⚠️ Note:** SQLite cannot be used on Vercel. You must use a cloud database like PostgreSQL.
+
 ## 📧 Support
 
 For issues or questions about the hospital management system, please refer to:
 - Database schema documentation in `/prisma/schema.prisma`
 - Component documentation in respective files
-- TypeScript types in `/src/types/`
+- [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for deployment help
+- GitHub Issues for bug reports
 
 ## ⚠️ Important Notes
 
@@ -278,6 +305,7 @@ For issues or questions about the hospital management system, please refer to:
 - **HIPAA Compliance:** Additional measures needed for healthcare data
 - **Performance:** Monitor database performance with larger datasets
 - **Updates:** Keep dependencies updated for security
+- **Database:** PostgreSQL required for Vercel deployment
 
 ---
 

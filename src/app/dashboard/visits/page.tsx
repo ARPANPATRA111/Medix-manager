@@ -72,7 +72,7 @@ async function getDoctorVisits(doctorId: string) {
 export default async function VisitsPage() {
   const session = await auth()
   
-  if (!session) {
+  if (!session || !session.user.id) {
     redirect("/auth/signin")
   }
 
